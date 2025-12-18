@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piso - Tu Asesor Inmobiliario</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <img src="https://i.postimg.cc/0jW1kB0k/logo-tuasesor.png" alt="Tu Asesor Inmobiliario" class="logo">
+        <h2>Contacta conmigo para visitar este piso</h2>
+        <p>📞 635 11 68 11 | 📱 <a href="https://wa.me/34635116811" class="whatsapp">WhatsApp</a> | ✉️ tuasesorinmobiliario.eu@gmail.com | 🌐 www.tuasesorinmobiliario.eu</p>
+    </div>
+
+    <iframe id="anuncio" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"></iframe>
+
+    <a href="https://wa.me/34635116811?text=Me%20interesa%20este%20piso" class="whatsapp-flotante">💬 WhatsApp</a>
+
+    <script>
+        const params = new URLSearchParams(location.search);
+        const url = params.get('url');
+        if (url) {
+            const iframe = document.getElementById('anuncio');
+            iframe.src = url;
+            iframe.onload = () => {
+                const doc = iframe.contentDocument || iframe.contentWindow.document;
+                const style = doc.createElement('style');
+                style.textContent = `
+                    /* OCULTAR ELEMENTOS COMUNES EN TODOS LOS PORTALES */
+                    header, .header, nav, .logo, footer, .footer, [class*="ad"], [id*="ad"], [class*="publi"], .advertisement, .cookies, .cookie-banner { display:none !important; }
+
+                    /* IDEALISTA */
+                    .about-advertiser, .advertiser-data, .contact-phone, .icon-phone { display:none !important; }
+
+                    /* FOTOCASA */
+                    .re-ContactButtons, .sui-ContactButtons, .re-ContactSeller, .contact-phone { display:none !important; }
+
+                    /* HABITACLIA */
+                    .contact-box, .agency-info, .phone-number { display:none !important; }
+
+                    /* MILANUNCIOS */
+                    .contact-info, .seller-phone, .ad-footer { display:none !important; }
+
+                    /* YAENCONTRÉ */
+                    .contact-form, .seller-info, .phone-button { display:none !important; }
+
+                    body { margin-top: 100px !important; }
+                `;
+                doc.head.appendChild(style);
+            };
+        }
+    </script>
+</body>
+</html>
