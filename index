@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Asesor Inmobiliario - Generador de enlaces</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <img src="https://i.postimg.cc/0jW1kB0k/logo-tuasesor.png" alt="Tu Asesor Inmobiliario" class="logo"> <!-- Sube tu logo a postimg.cc o similar y cambia el link -->
+        <h1>Genera enlace limpio para tu cliente</h1>
+        <input type="text" id="url" placeholder="Pega aquí el enlace del anuncio (Idealista, Fotocasa...)" style="width:100%; padding:10px; margin:20px 0;">
+        <button onclick="generar()">Generar enlace</button>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function generar() {
+            const url = document.getElementById('url').value;
+            if (!url) return alert('Pega un enlace válido');
+            const id = btoa(url).substring(0,12).replace(/=/g,'');
+            const enlace = location.origin + '/ver/' + id + '?url=' + encodeURIComponent(url);
+            document.getElementById('resultado').innerHTML = `<strong>Enlace para el cliente:</strong><br><input type="text" value="${enlace}" style="width:100%; padding:10px;">`;
+        }
+    </script>
+</body>
+</html>
